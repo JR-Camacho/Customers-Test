@@ -1,0 +1,46 @@
+<h1 class="title text-center" *ngIf="customer">{{customer.first_name}} {{customer.last_name}}</h1>
+
+<main class="main-container">
+    
+<div class="phones">
+    <!-- <ng-template *ngIf="phones"> -->
+        <div class="phone" *ngFor="let phone of phones">
+            <a href="tel:+1{{phone.phone_number}}" class="phone-number">{{phone.phone_number}}</a>
+        </div>
+    <!-- </ng-template> -->
+    <form action="" class="form">
+        <input type="text" name="phone_number" placeholder="Phone number" class="input" [(ngModel)]="phone.phone_number"(keyup)="validatePhoneNumber($event)">
+        <div *ngIf="isUpdatingPhone == false">
+          <input type="button"class="btn btn-success input bt" value="Save" (click)="newPhone()" *ngIf="isActivePhoneNumber">
+          <input type="button"class="btn btn-success input bt" value="Save" (click)="newPhone()" *ngIf="!isActivePhoneNumber" disabled>
+        </div>
+        <div *ngIf="isUpdatingPhone == true">
+            <input type="button"class="btn btn-warning input bt" value="Update" (click)="updatePhone()" *ngIf="isActivePhoneNumber"> 
+            <input type="button"class="btn btn-warning input bt" value="Update" (click)="updatePhone()" *ngIf="!isActivePhoneNumber" disabled>  
+          </div>
+    </form>
+</div>
+
+<div class="addreses">
+    <!-- <ng-template *ngIf="addresses"> -->
+        <div class="addres" *ngFor="let address of addresses">
+            <p>{{address.country}}</p>
+            <p>{{address.city}}</p>
+            <p>{{address.street}}</p>
+        </div>
+    <!-- </ng-template> -->
+    <form action="" class="form">
+        <input type="text" name="country" placeholder="Country" class="input" [(ngModel)]="address.country"(keyup)="validateCountry($event)" (keyup)="validateInputsAddress()">
+        <input type="text" name="city" placeholder="City" class="input" [(ngModel)]="address.city"(keyup)="validateCity($event)" (keyup)="validateInputsAddress()">
+        <input type="text" name="street" placeholder="Street" class="input" [(ngModel)]="address.street"(keyup)="validateStreet($event)" (keyup)="validateInputsAddress()">
+        <div *ngIf="isUpdatingAddress == false">
+          <input type="button"class="btn btn-success input bt" value="Save" (click)="newAddress()" *ngIf="isActiveAllAddress">
+          <input type="button"class="btn btn-success input bt" value="Save" (click)="newAddress()" *ngIf="!isActiveAllAddress" disabled>
+        </div>
+        <div *ngIf="isUpdatingAddress == true">
+            <input type="button"class="btn btn-warning input bt" value="Update" (click)="updateAddress()" *ngIf="isActiveAllAddress"> 
+            <input type="button"class="btn btn-warning input bt" value="Update" (click)="updateAddress()" *ngIf="!isActiveAllAddress" disabled>  
+          </div>
+    </form>
+</div>
+</main>

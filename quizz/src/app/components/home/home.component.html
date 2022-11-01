@@ -1,0 +1,39 @@
+<h1 class="text-center title">CUSTOMERS</h1>
+<main class="main-container">
+    
+    <div class="form-container">
+        <form action="" class="form">
+            <input type="text" name="first_name" placeholder="First name" class="input" [(ngModel)]="customer.first_name" id="first_name" (keyup)="validateFirstName($event)" (keyup)="validateInputs()">
+            <input type="text" name="last_name" placeholder="Last name" class="input" [(ngModel)]="customer.last_name" id="last_name" (keyup)="validateLastName($event)" (keyup)="validateInputs()">
+            <input type="text" name="status" placeholder="Status" class="input" [(ngModel)]="customer.status" id="status" (keyup)="validateStatus($event)" (keyup)="validateInputs()">
+            <div *ngIf="isUpdating == false">
+              <input type="button"class="btn btn-success input bt" value="Save" (click)="newCustomer()" *ngIf="isActiveAll">
+              <input type="button"class="btn btn-success input bt" value="Save" (click)="newCustomer()" *ngIf="!isActiveAll" disabled>
+            </div>
+            <div *ngIf="isUpdating == true">
+                <input type="button"class="btn btn-warning input bt" value="Update" (click)="updateCustomer()" *ngIf="isActiveAll"> 
+                <input type="button"class="btn btn-warning input bt" value="Update" (click)="updateCustomer()" *ngIf="!isActiveAll" disabled>  
+              </div>
+        </form>
+    </div>
+
+    <div class="customers-container" *ngIf="customers">
+        <div class="customer-card" *ngFor="let customer of customers">
+            <header class="customer_card-header">
+                <div class="green-line"></div>
+                <p class="customer-name">{{customer.first_name}} {{customer.last_name}}</p>
+            </header>
+            <main>
+                <div class="status">
+                    <i class="fa-regular fa-eye" *ngIf="customer.status == 'Active'"></i>
+                    <i class="fa-regular fa-eye-slash" *ngIf="customer.status == 'Inactive'"></i>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-primary bt-action" [routerLink]="['/customer', customer.id]"><i class="fa-solid fa-info"></i></button>
+                    <button class="btn btn-warning bt-action" (click)="getCustomer(customer.id)" (click)="isUpdating = true"><i class="fa-solid fa-user-pen"></i></button>
+                    <button class="btn btn-danger  bt-action"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </main>
+        </div>
+    </div>
+</main>
