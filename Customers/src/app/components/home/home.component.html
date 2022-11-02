@@ -1,5 +1,7 @@
-<h1 class="text-center title">CUSTOMERS</h1>
 <main class="main-container">
+
+    <h1 class="text-center title">CUSTOMERS</h1>
+    <div class="container">
     
     <div class="form-container">
         <form action="" class="form">
@@ -23,17 +25,22 @@
                 <div class="green-line"></div>
                 <p class="customer-name">{{customer.first_name}} {{customer.last_name}}</p>
             </header>
-            <main>
-                <div class="status">
-                    <i class="fa-regular fa-eye" *ngIf="customer.status == 'Active'"></i>
-                    <i class="fa-regular fa-eye-slash" *ngIf="customer.status == 'Inactive'"></i>
+            <main class="card-main">
+                <div class="body-card">
+                    <div class="status">
+                        <!-- <i class="fa-regular fa-eye" *ngIf="customer.status == 'Active'"></i>
+                        <i class="fa-regular fa-eye-slash" *ngIf="customer.status == 'Inactive'"></i> -->
+                        <p class="text">Status: {{customer.status}}</p>
+                    </div>
+                    <button class="btn btn-primary bt-action" [routerLink]="['/customer', customer.id]">See more</button>
                 </div>
                 <div class="actions">
-                    <button class="btn btn-primary bt-action" [routerLink]="['/customer', customer.id]"><i class="fa-solid fa-info"></i></button>
                     <button class="btn btn-warning bt-action" (click)="getCustomer(customer.id)" (click)="isUpdating = true"><i class="fa-solid fa-user-pen"></i></button>
-                    <button class="btn btn-danger  bt-action"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-danger bt-action" (click)="deleteCustomer(customer.id)"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </main>
         </div>
     </div>
+</div>
+
 </main>

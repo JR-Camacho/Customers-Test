@@ -16,16 +16,21 @@
     padding: 10px;
 } */
 
+
 .title{
     margin: 30px;
-    margin-top: 100px;
 }
 
-.main-container{
+.container{
     width: 100%;
     display: flex;
     justify-content: space-evenly;
 }
+
+/* .main-container{
+    background-color: #e7f9f2;
+    height: 100vh;
+} */
 
 .form-container{
     width: 40%;
@@ -49,18 +54,51 @@
     padding: 0;
 } */
 
-.customers-conatiner{
+.customers-container{
     width: 40%;
 }
 
-.customer{
+.customer-card{
     width: 100%;
+    height: 150px;
+    /* margin: 20px; */
+    background-color: #fff;
+    box-shadow: 0px 0px 2px black;
+}
+
+.customer_card-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+}
+
+.green-line{
+    width: 90%;
+    height: 20px;
+    background-color: #395b64;
+}
+
+.customer-name{
+    color: #395b64;
+}
+
+.card-main{
+    display: flex;
+    justify-content: space-between;
+}
+
+.body-card{
+    margin: 10px;
 }
 
 .actions{
-    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
+    margin: 10px;
 }
 
 /* .buttons{
@@ -69,10 +107,11 @@
 
 .bt-action{
     padding: 5px;
+    margin: 5px 0;
 }
 
 /* Modal */
-.modalConfirm{
+/* .modalConfirm{
     width: 40vw;
     height: 20vh;
     left: 30vw;
@@ -108,7 +147,7 @@
     border-radius: 3px;
     width: 80px;
     height: 45px;
-}
+} */
 
 /* .cancel{
     background-color: #85929E;
@@ -123,22 +162,47 @@
     font-size: 0.8rem;
 }
 
-@media screen and (max-width: 1000px) {
-    .container-main{
+
+
+@media screen and (max-width:1000px) {
+    .container{
         flex-direction: column;
         align-items: center;
     }
 
-    .form{
-        width: 55%;
+    .form-container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
-    .action_b{
-        margin: 0 10px;
+    .form{
+        width: 80%;
+    }
+
+    .customers-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
     }
 }
 
-@media screen and (max-width: 750px) {
+
+@media screen and (max-width:600px) {
+
+    .form{
+        width: 90%;
+    }
+
+    .customers-container{
+        width: 90%;
+    }
+}
+
+
+
+/* @media screen and (max-width: 750px) {
     .container-main{
         flex-direction: column;
         align-items: center;
@@ -157,7 +221,7 @@
         height: 20vh;
         left: 20vw;
     }
-}
+} */
 
 /* @media screen and (max-width: 454px) {
     .c-f{

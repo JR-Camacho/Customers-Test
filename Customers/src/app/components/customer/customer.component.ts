@@ -22,6 +22,9 @@ export class CustomerComponent implements OnInit {
   idPhone:number;
   idAddress:number;
 
+
+  isActiveFormPhone:boolean = false;
+  isActiveFormAddress:boolean = false;
   isUpdatingPhone:boolean = false;
   isUpdatingAddress:boolean = false;
   isDeleting:boolean = false;
@@ -90,6 +93,8 @@ export class CustomerComponent implements OnInit {
 
   //Phone
   getPhone(id:number){
+    this.isUpdatingPhone = true;
+    this.isActiveFormPhone = true;
     this.phoneService.getPhone(id).subscribe(res => {
       let phone:any = res;
       this.phone.id = phone.id;
@@ -100,7 +105,6 @@ export class CustomerComponent implements OnInit {
   }
 
   newPhone(){
-    this.isLoading = true;
     this.phoneService.newPhone(this.phone).subscribe(res => {
       this.getCustomer();
       this.isLoading = false;
@@ -111,7 +115,6 @@ export class CustomerComponent implements OnInit {
   }
 
   updatePhone(){
-    this.isLoading = true;
     this.phoneService.updatePhone(this.phone).subscribe(res => {
       this.getCustomer();
       this.isLoading = false;
@@ -121,14 +124,14 @@ export class CustomerComponent implements OnInit {
     })
   }
 
-  getIdPhone(idPhone:number){
-    this.idPhone = idPhone;
-  }
+  // getIdPhone(idPhone:number){
+  //   this.idPhone = idPhone;
+  // }
 
-  deletePhone(){
+  deletePhone(id:number){
     // this.clearMessage();
     this.isLoading = true;
-    this.phoneService.deletePhone(this.idPhone).subscribe(res => {
+    this.phoneService.deletePhone(id).subscribe(res => {
       this.getCustomer();
       this.isLoading = false;
       // if(this.formIsActive) this.formIsActive = false;
@@ -174,14 +177,14 @@ export class CustomerComponent implements OnInit {
     })
   }
 
-  getIdAddress(idAddress:number){
-    this.idAddress = idAddress;
-  }
+  // getIdAddress(idAddress:number){
+  //   this.idAddress = idAddress;
+  // }
 
-  deleteAddress(){
+  deleteAddress(id:number){
     // this.clearMessage();
     this.isLoading = true;
-    this.addressService.deleteAddress(this.idAddress).subscribe(res => {
+    this.addressService.deleteAddress(id).subscribe(res => {
       this.getCustomer();
       this.isLoading = false;
       // if(this.formIsActive) this.formIsActive = false;

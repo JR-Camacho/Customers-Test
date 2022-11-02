@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return Customer::all();
+        
     }
 
     /**
@@ -35,37 +35,29 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['first_name' => 'required', 'last_name' => 'required', 'status' => 'required']);
-
-        return Customer::create($request->all());
+        $request->validate(['country' => 'required', 'city' => 'required', 'street' => 'required','customer_id' => 'required']);
+        
+        return Address::create($request->all()); 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $customer = Customer::findOrFail($id);
-        $phones = Customer::findOrFail($id)->phone;
-        $addresses = Customer::findOrFail($id)->address;
-
-        return response()->json([
-            'customer' => $customer,
-            'phones' => $phones,
-            'addresses' => $addresses,
-        ]);
+        return Address::findOrFail($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit(Address $address)
     {
         //
     }
@@ -74,25 +66,26 @@ class CustomerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Address $address)
     {
-        $customerForUpdate = Customer::findOrFail($request->id);
-        $request->validate(['first_name' => 'required', 'last_name' => 'required', 'status' => 'required']);
+        $addressForUpdate = Address::findOrFail($request->id);
 
-        return $customerForUpdate->update($request->all());
+        $request->validate(['country' => 'required', 'city' => 'required', 'street' => 'required','customer_id' => 'required']);
+        
+        return $addressForUpdate->update($request->all()); 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return Customer::findOrFail($id)->destroy();
+        return Address::findOrFail($id)->delete();
     }
 }

@@ -1,0 +1,47 @@
+.map-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.map{
+    width: 50%;
+    height: 30vw;
+}
+
+.form-container{
+  margin: 20px 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.filter{
+  width: 50%;
+  height: 50px;
+  border-radius: 8px;
+  padding-left: 20px;
+}
+
+@media screen and (max-width:1000px) {
+  .filter{
+    width: 80%;
+  }
+
+  .map{
+    width: 80%;
+    height: 80vh;
+  }
+}
+
+@media screen and (max-width:600px) {
+  .filter{
+    width: 90%;
+  }
+
+  .map{
+    width: 90%;
+    height: 90vh;
+  }
+}
+

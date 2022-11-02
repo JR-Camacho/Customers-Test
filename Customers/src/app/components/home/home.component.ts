@@ -75,14 +75,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getId(id:number){
-    this.id = id;
-  }
+  // getId(id:number){
+  //   this.id = id;
+  // }
 
-  deleteCustomer(){
+  deleteCustomer(id:number){
     // this.clearMessage();
     this.isLoading = true;
-    this.customersService.deleteCustomer(this.id).subscribe(res => {
+    this.customersService.deleteCustomer(id).subscribe(res => {
       this.getCustomers();
       this.isLoading = false;
       if(this.formIsActive) this.formIsActive = false;

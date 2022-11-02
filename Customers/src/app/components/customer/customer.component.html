@@ -4,11 +4,20 @@
     
 <div class="phones">
     <!-- <ng-template *ngIf="phones"> -->
+        <button class="btn btn-primary btn-new" *ngIf="!isActiveFormPhone" (click)="isActiveFormPhone = true" (click)="isUpdatingPhone = false">New Phone</button>
+        <button class="btn btn-warning btn-new" *ngIf="isActiveFormPhone" (click)="isActiveFormPhone = false">Cancel</button>
         <div class="phone" *ngFor="let phone of phones">
-            <a href="tel:+1{{phone.phone_number}}" class="phone-number">{{phone.phone_number}}</a>
+            <div class="phone-number_container">
+                <a href="tel:{{phone.phone_number}}" class="phone-number">{{phone.phone_number}}</a>
+            </div>
+            <div class="actions-container">
+                <a href="tel:{{phone.phone_number}}" class="btn bg-dark bt-action bt-phone"><i class="fa-solid fa-phone white"></i></a>
+                <button class="btn btn-warning bt-action" (click)="getPhone(phone.id)"><i class="fa-solid fa-pen"></i></button>
+                <button class="btn btn-danger bt-action" (click)="deletePhone(phone.id)"><i class="fa-solid fa-xmark"></i></button>
+            </div>
         </div>
     <!-- </ng-template> -->
-    <form action="" class="form">
+    <form action="" class="form form-phone" *ngIf="isActiveFormPhone">
         <input type="text" name="phone_number" placeholder="Phone number" class="input" [(ngModel)]="phone.phone_number"(keyup)="validatePhoneNumber($event)">
         <div *ngIf="isUpdatingPhone == false">
           <input type="button"class="btn btn-success input bt" value="Save" (click)="newPhone()" *ngIf="isActivePhoneNumber">
@@ -21,15 +30,24 @@
     </form>
 </div>
 
-<div class="addreses">
+<div class="addresses">
+    <button class="btn btn-primary btn-new" *ngIf="!isActiveFormAddress" (click)="isActiveFormAddress = true" (click)="isUpdatingAddress = false">New Address</button>
+    <button class="btn btn-warning btn-new" *ngIf="isActiveFormAddress" (click)="isActiveFormAddress = false" (click)="isUpdatingAddress = false">Cancel</button>
     <!-- <ng-template *ngIf="addresses"> -->
-        <div class="addres" *ngFor="let address of addresses">
-            <p>{{address.country}}</p>
-            <p>{{address.city}}</p>
-            <p>{{address.street}}</p>
+        <div class="address" *ngFor="let address of addresses">
+            <div class="address-info">
+                <p>Country: {{address.country}}</p>
+                <p>City: {{address.city}}</p>                    
+                <p>Street: {{address.street}}</p>
+            </div>
+            <div class="actions-address">
+                <a [routerLink]="['/map', address.city + ', ' + address.street]" class="btn bg-dark bt-action bt-phone"><i class="fa-solid fa-location-pin white"></i></a>
+                <button class="btn btn-warning bt-action"><i class="fa-solid fa-pen"></i></button>                    
+                <button class="btn btn-danger bt-action" (click)="deleteAddress(address.id)"><i class="fa-solid fa-xmark"></i></button>
+            </div>
         </div>
     <!-- </ng-template> -->
-    <form action="" class="form">
+    <form action="" class="form" *ngIf="isActiveFormAddress">
         <input type="text" name="country" placeholder="Country" class="input" [(ngModel)]="address.country"(keyup)="validateCountry($event)" (keyup)="validateInputsAddress()">
         <input type="text" name="city" placeholder="City" class="input" [(ngModel)]="address.city"(keyup)="validateCity($event)" (keyup)="validateInputsAddress()">
         <input type="text" name="street" placeholder="Street" class="input" [(ngModel)]="address.street"(keyup)="validateStreet($event)" (keyup)="validateInputsAddress()">

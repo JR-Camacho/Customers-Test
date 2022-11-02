@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Address;
+use App\Models\Phone;
 use Illuminate\Http\Request;
 
-class AddressController extends Controller
+class PhoneController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class AddressController extends Controller
      */
     public function index()
     {
-        
+        //
     }
 
     /**
@@ -35,29 +35,29 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['country' => 'required', 'city' => 'required', 'street' => 'required','customer_id' => 'required']);
-        
-        return Address::create($request->all()); 
+        $request->validate(['phone_number' => 'required|max:20', 'customer_id' => 'required']);
+
+        return Phone::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Address  $address
+     * @param  \App\Models\Phone  $phone
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Address::findOrFail($id);
+        return Phone::findOrFail($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Address  $address
+     * @param  \App\Models\Phone  $phone
      * @return \Illuminate\Http\Response
      */
-    public function edit(Address $address)
+    public function edit(Phone $phone)
     {
         //
     }
@@ -66,26 +66,25 @@ class AddressController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Address  $address
+     * @param  \App\Models\Phone  $phone
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Address $address)
+    public function update(Request $request, Phone $phone)
     {
-        $addressForUpdate = Address::findOrFail($request->id);
-
+        $phoneForUpdate = Phone::findOrFail($request->id);
         $request->validate(['country' => 'required', 'city' => 'required', 'street' => 'required','customer_id' => 'required']);
-        
-        return $addressForUpdate->update($request->all()); 
+
+        return $phoneForUpdate->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Address  $address
+     * @param  \App\Models\Phone  $phone
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return Address::findOrFail($id)->destroy();
+        return Phone::findOrFail($id)->delete();
     }
 }

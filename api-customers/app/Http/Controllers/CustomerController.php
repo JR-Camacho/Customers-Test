@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Phone;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class PhoneController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PhoneController extends Controller
      */
     public function index()
     {
-        //
+        return Customer::all();
     }
 
     /**
@@ -35,29 +35,37 @@ class PhoneController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['phone_number' => 'required|max:20', 'customer_id' => 'required']);
+        $request->validate(['first_name' => 'required', 'last_name' => 'required', 'status' => 'required']);
 
-        return Phone::create($request->all());
+        return Customer::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Phone  $phone
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Phone::findOrFail($id);
+        $customer = Customer::findOrFail($id);
+        $phones = Customer::findOrFail($id)->phone;
+        $addresses = Customer::findOrFail($id)->address;
+
+        return response()->json([
+            'customer' => $customer,
+            'phones' => $phones,
+            'addresses' => $addresses,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Phone  $phone
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Phone $phone)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -66,25 +74,25 @@ class PhoneController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Phone  $phone
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Phone $phone)
+    public function update(Request $request, Customer $customer)
     {
-        $phoneForUpdate = Phone::findOrFail($request->id);
-        $request->validate(['country' => 'required', 'city' => 'required', 'street' => 'required','customer_id' => 'required']);
+        $customerForUpdate = Customer::findOrFail($request->id);
+        $request->validate(['first_name' => 'required', 'last_name' => 'required', 'status' => 'required']);
 
-        return $phoneForUpdate->update($request->all());
+        return $customerForUpdate->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Phone  $phone
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return Phone::findOrFail($id)->destroy();
+         return Customer::findOrFail($id)->delete();
     }
 }
